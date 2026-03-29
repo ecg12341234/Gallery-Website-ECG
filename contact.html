@@ -15,7 +15,7 @@
 <div class="floor floor--sm"></div>
 
 <div class="nav-fixed">
-  <a class="nav-logo" href="gallery-website.html" onclick="return goBack(event)">
+  <a class="nav-logo" href="index.html" onclick="return goBack(event)">
     <svg class="nav-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <rect width="64" height="64" fill="#0a0a0a"/>
       <rect x="12" y="16" width="38" height="6" fill="#f8f8f6"/>
@@ -26,7 +26,7 @@
   </a>
 </div>
 
-<a class="pg-back" href="gallery-website.html" onclick="return goBack(event)">
+<a class="pg-back" href="index.html" onclick="return goBack(event)">
   <span class="back-arrow"></span>
   Gallery
 </a>
@@ -36,12 +36,12 @@
   <h2>Get in Touch</h2>
   <div class="pg-line"></div>
   <p>Interested in working with us? Have a question or a project in mind? We'd love to hear from you.</p>
-  <div class="ct-form">
-    <div class="fg"><label>Name</label><input type="text" placeholder="Your full name"></div>
-    <div class="fg"><label>Email</label><input type="email" placeholder="you@email.com"></div>
-    <div class="fg"><label>Message</label><textarea placeholder="Tell us about your project or question..."></textarea></div>
-    <button type="button">Send Message</button>
-  </div>
+  <form class="ct-form" action="https://formspree.io/f/mgopalgb" method="POST">
+    <div class="fg"><label>Name</label><input type="text" name="name" placeholder="Your full name" required></div>
+    <div class="fg"><label>Email</label><input type="email" name="email" placeholder="you@email.com" required></div>
+    <div class="fg"><label>Message</label><textarea name="message" placeholder="Tell us about your project or question..." required></textarea></div>
+    <button type="submit">Send Message</button>
+  </form>
 </div>
 
 <div class="page-transition" id="pageTransition"></div>
@@ -52,7 +52,7 @@
     const overlay = document.getElementById('pageTransition');
     overlay.style.pointerEvents = 'all';
     overlay.classList.add('active');
-    setTimeout(() => window.location.href = 'gallery-website.html', 750);
+    setTimeout(() => window.location.href = 'index.html', 750);
     return false;
   }
   document.addEventListener('keydown', (e) => {
