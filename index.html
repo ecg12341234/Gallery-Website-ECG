@@ -176,8 +176,13 @@
     });
   }
 
+  // ── Restore scroll position if returning from a content page
+  const savedScroll = parseFloat(sessionStorage.getItem('galleryScroll') || '0');
+  sessionStorage.removeItem('galleryScroll');
+
   // ── Smooth horizontal scroll (lerped with momentum)
-  let scrollTarget = 0, scrollCurrent = 0, isSmooth = true, velocity = 0;
+  let scrollTarget = savedScroll, scrollCurrent = savedScroll, isSmooth = true, velocity = 0;
+  museum.scrollLeft = savedScroll;
   const maxScroll = () => museum.scrollWidth - museum.clientWidth;
 
   // Trackpad vs mouse wheel detection
@@ -300,6 +305,7 @@
       overlay.style.setProperty('--ox', Math.round(e.clientX / window.innerWidth * 100) + '%');
       overlay.style.setProperty('--oy', Math.round(e.clientY / window.innerHeight * 100) + '%');
     }
+    sessionStorage.setItem('galleryScroll', museum.scrollLeft);
     overlay.style.pointerEvents = 'all';
     overlay.classList.add('active');
     setTimeout(() => window.location.href = url, 750);
