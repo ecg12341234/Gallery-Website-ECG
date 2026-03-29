@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eagle Consulting Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body class="is-museum">
+
+<!-- Loader -->
+<div class="loader" id="loader">
+  <p class="l-tag">Student Consulting</p>
+  <h1>The<br>Gallery<span>.</span></h1>
+  <div class="l-line"></div>
+  <p class="l-motto">Where your problem becomes our problem</p>
+</div>
+
+<!-- Fixed layers -->
+<div class="dot-overlay"></div>
+<div class="ceiling"></div>
+<div class="floor"></div>
+<div class="progress" id="progressBar"></div>
+
+<div class="nav-fixed" id="navFixed">
+  <div class="nav-logo">
+    <svg class="nav-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="64" height="64" fill="#0a0a0a"/>
+      <rect x="12" y="16" width="38" height="6" fill="#f8f8f6"/>
+      <rect x="12" y="29" width="24" height="6" fill="#2b4eff"/>
+      <rect x="12" y="42" width="38" height="6" fill="#f8f8f6"/>
+    </svg>
+    ECG Gallery<span>.</span>
+  </div>
+</div>
+
+<div class="nav-dots" id="navDots">
+  <div class="nav-dot active" data-target="entrance"></div>
+  <div class="nav-dot" data-target="s-about"></div>
+  <div class="nav-dot" data-target="s-work"></div>
+  <div class="nav-dot" data-target="s-team"></div>
+  <div class="nav-dot" data-target="s-contact"></div>
+</div>
+
+<!-- Page transition overlay -->
+<div class="page-transition" id="pageTransition"></div>
+
+<!-- Museum -->
+<div class="museum" id="museum">
+  <div class="room">
+
+    <!-- Entrance -->
+    <div class="entrance" id="entrance">
+      <div class="e-content">
+        <p class="e-tag">Est. 2026 — Consulting</p>
+        <h1>Eagle<br>Consulting<br>Group<span class="dot">.</span></h1>
+        <p class="e-motto">"Where your problem becomes our problem"</p>
+      </div>
+      <div class="scroll-cue">
+        <span>Scroll to explore</span>
+        <div class="arrow"></div>
+      </div>
+    </div>
+
+    <div class="gap gap--l"></div>
+
+    <!-- About -->
+    <div class="p-section" id="s-about">
+      <div class="painting painting--about" onclick="navigateTo('about.html', event)">
+        <div class="p-track"></div><div class="p-glow"></div>
+        <span class="p-number">01</span>
+        <div class="p-frame">
+          <div class="p-canvas">
+            <div class="art-dots"></div>
+            <div class="art-line"></div>
+          </div>
+        </div>
+        <div class="p-label"><h3>About Us</h3><p>Our story & mission</p></div>
+      </div>
+    </div>
+
+    <div class="gap gap--m"></div>
+
+    <!-- Work -->
+    <div class="p-section" id="s-work">
+      <div class="painting painting--work" onclick="navigateTo('work.html', event)">
+        <div class="p-track"></div><div class="p-glow"></div>
+        <span class="p-number">02</span>
+        <div class="p-frame">
+          <div class="p-canvas">
+            <div class="art-grid"></div>
+            <div class="art-block"></div>
+            <span class="art-text">Works</span>
+          </div>
+        </div>
+        <div class="p-label"><h3>Past Works</h3><p>Selected case studies</p></div>
+      </div>
+    </div>
+
+    <div class="gap gap--l"></div>
+
+    <!-- Team -->
+    <div class="p-section" id="s-team">
+      <div class="painting painting--team" onclick="navigateTo('team.html', event)">
+        <div class="p-track"></div><div class="p-glow"></div>
+        <span class="p-number">03</span>
+        <div class="p-frame">
+          <div class="p-canvas">
+            <div class="art-circle"></div>
+            <span class="art-label">US</span>
+            <div class="art-dot-sm"></div>
+          </div>
+        </div>
+        <div class="p-label"><h3>Our Team</h3><p>The minds behind it all</p></div>
+      </div>
+    </div>
+
+    <div class="gap gap--m"></div>
+
+    <!-- Contact -->
+    <div class="p-section" id="s-contact">
+      <div class="painting painting--contact" onclick="navigateTo('contact.html', event)">
+        <div class="p-track"></div><div class="p-glow"></div>
+        <span class="p-number">04</span>
+        <div class="p-frame">
+          <div class="p-canvas">
+            <div class="art-cross"></div>
+            <div class="art-dot-red"></div>
+            <div class="art-corner"></div>
+          </div>
+        </div>
+        <div class="p-label"><h3>Contact</h3><p>Begin a conversation</p></div>
+      </div>
+    </div>
+
+    <div class="gap gap--l"></div>
+
+    <div class="end-section">
+      <p class="end-tag">End of Exhibition</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const museum  = document.getElementById('museum');
+  const progress = document.getElementById('progressBar');
+  const dots    = document.querySelectorAll('.nav-dot');
+  const sections = ['entrance', 's-about', 's-work', 's-team', 's-contact'];
+
+  // Loader — only show on first visit per session
+  const loader  = document.getElementById('loader');
+  const navEl   = document.getElementById('navFixed');
+  const navDots = document.getElementById('navDots');
+
+  if (sessionStorage.getItem('loaderShown')) {
+    // Skip loader; show nav immediately
+    loader.classList.add('hidden');
+    navEl.style.opacity   = '1';
+    navDots.style.opacity = '1';
+  } else {
+    // First visit: animate loader, then reveal nav
+    navEl.style.opacity   = '0';
+    navDots.style.opacity = '0';
+    navEl.style.transition   = 'opacity 0.6s ease';
+    navDots.style.transition = 'opacity 0.6s ease';
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        navEl.style.opacity   = '1';
+        navDots.style.opacity = '1';
+        sessionStorage.setItem('loaderShown', '1');
+      }, 2600);
+    });
+  }
+
+  // ── Smooth horizontal scroll (lerped with momentum)
+  let scrollTarget = 0, scrollCurrent = 0, isSmooth = true, velocity = 0;
+  const maxScroll = () => museum.scrollWidth - museum.clientWidth;
+
+  // Trackpad vs mouse wheel detection
+  let lastWheelTime = 0, wheelCount = 0, isTrackpad = false;
+
+  museum.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const now = performance.now();
+    if (now - lastWheelTime < 50) { wheelCount++; } else { wheelCount = 0; }
+    lastWheelTime = now;
+    isTrackpad = wheelCount > 3 || Math.abs(e.deltaY) < 30;
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+    if (isTrackpad) {
+      scrollTarget = Math.max(0, Math.min(maxScroll(), scrollTarget + delta * 2.5));
+    } else {
+      velocity += delta * 0.8;
+      scrollTarget = Math.max(0, Math.min(maxScroll(), scrollTarget + delta * 4.5));
+    }
+  }, { passive: false });
+
+  function smoothScroll() {
+    if (isSmooth) {
+      const lerpFactor = isTrackpad ? 0.18 : 0.13;
+      const diff = scrollTarget - scrollCurrent;
+      if (!isTrackpad && Math.abs(velocity) > 0.5) {
+        velocity *= 0.92;
+        scrollTarget = Math.max(0, Math.min(maxScroll(), scrollTarget + velocity * 0.3));
+      } else { velocity *= 0.8; }
+      scrollCurrent += diff * lerpFactor;
+      if (Math.abs(diff) < 0.5) { scrollCurrent = scrollTarget; velocity = 0; }
+      museum.scrollLeft = scrollCurrent;
+    }
+    updateUI();
+    requestAnimationFrame(smoothScroll);
+  }
+  requestAnimationFrame(smoothScroll);
+
+  function updateUI() {
+    const m = maxScroll();
+    if (m <= 0) return;
+    progress.style.width = (museum.scrollLeft / m * 100) + '%';
+    let ci = 0, cd = Infinity;
+    sections.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const d = Math.abs(r.left + r.width / 2 - window.innerWidth / 2);
+      if (d < cd) { cd = d; ci = i; }
+    });
+    dots.forEach((d, i) => d.classList.toggle('active', i === ci));
+  }
+
+  museum.addEventListener('scroll', () => {
+    if (!isSmooth) { scrollTarget = museum.scrollLeft; scrollCurrent = museum.scrollLeft; }
+  });
+
+  // Drag with momentum
+  let isDrag = false, sx, sl, lastDragX = 0, dragVelocity = 0;
+  museum.addEventListener('mousedown', (e) => {
+    if (e.target.closest('.painting')) return;
+    isDrag = true; isSmooth = false;
+    sx = e.pageX; sl = museum.scrollLeft;
+    lastDragX = e.pageX; dragVelocity = 0; velocity = 0;
+    museum.style.cursor = 'grabbing';
+  });
+  const endDrag = () => {
+    if (isDrag) {
+      scrollTarget = Math.max(0, Math.min(maxScroll(), museum.scrollLeft - dragVelocity * 12));
+    }
+    isDrag = false; isSmooth = true;
+    scrollCurrent = museum.scrollLeft;
+    museum.style.cursor = 'grab';
+  };
+  museum.addEventListener('mouseleave', endDrag);
+  museum.addEventListener('mouseup', endDrag);
+  museum.addEventListener('mousemove', (e) => {
+    if (!isDrag) return; e.preventDefault();
+    dragVelocity = lastDragX - e.pageX;
+    lastDragX = e.pageX;
+    museum.scrollLeft = sl - (e.pageX - sx) * 1.6;
+  });
+
+  // Touch with momentum
+  let touchX = 0, touchSL = 0, lastTouchX = 0, touchVel = 0;
+  museum.addEventListener('touchstart', (e) => {
+    isSmooth = false; velocity = 0;
+    touchX = lastTouchX = e.touches[0].pageX;
+    touchSL = museum.scrollLeft; touchVel = 0;
+  }, { passive: true });
+  museum.addEventListener('touchmove', (e) => {
+    const cx = e.touches[0].pageX;
+    touchVel = lastTouchX - cx; lastTouchX = cx;
+    museum.scrollLeft = touchSL - (cx - touchX) * 1.4;
+  }, { passive: true });
+  museum.addEventListener('touchend', () => {
+    isSmooth = true;
+    scrollCurrent = museum.scrollLeft;
+    scrollTarget = Math.max(0, Math.min(maxScroll(), museum.scrollLeft - touchVel * 15));
+  });
+
+  // Nav dots
+  dots.forEach(d => d.addEventListener('click', () => {
+    const t = document.getElementById(d.dataset.target);
+    if (t) {
+      scrollTarget = Math.max(0, Math.min(maxScroll(), t.offsetLeft - (window.innerWidth / 2) + (t.offsetWidth / 2)));
+      velocity = 0;
+    }
+  }));
+
+  // Arrow keys
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); scrollTarget = Math.min(maxScroll(), scrollTarget + 400); }
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); scrollTarget = Math.max(0, scrollTarget - 400); }
+  });
+
+  // Circle-expand transition then navigate
+  function navigateTo(url, e) {
+    const overlay = document.getElementById('pageTransition');
+    if (e) {
+      overlay.style.setProperty('--ox', Math.round(e.clientX / window.innerWidth * 100) + '%');
+      overlay.style.setProperty('--oy', Math.round(e.clientY / window.innerHeight * 100) + '%');
+    }
+    overlay.style.pointerEvents = 'all';
+    overlay.classList.add('active');
+    setTimeout(() => window.location.href = url, 750);
+  }
+</script>
+</body>
+</html>

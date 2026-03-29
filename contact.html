@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — The Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body class="is-page">
+
+<div class="dot-overlay"></div>
+<div class="ceiling"></div>
+<div class="floor floor--sm"></div>
+
+<div class="nav-fixed">
+  <a class="nav-logo" href="gallery-website.html" onclick="return goBack(event)">
+    <svg class="nav-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="64" height="64" fill="#0a0a0a"/>
+      <rect x="12" y="16" width="38" height="6" fill="#f8f8f6"/>
+      <rect x="12" y="29" width="24" height="6" fill="#2b4eff"/>
+      <rect x="12" y="42" width="38" height="6" fill="#f8f8f6"/>
+    </svg>
+    ECG Gallery<span>.</span>
+  </a>
+</div>
+
+<a class="pg-back" href="gallery-website.html" onclick="return goBack(event)">
+  <span class="back-arrow"></span>
+  Gallery
+</a>
+
+<div class="pg-content">
+  <span class="pg-tag">04 — Contact</span>
+  <h2>Get in Touch</h2>
+  <div class="pg-line"></div>
+  <p>Interested in working with us? Have a question or a project in mind? We'd love to hear from you.</p>
+  <div class="ct-form">
+    <div class="fg"><label>Name</label><input type="text" placeholder="Your full name"></div>
+    <div class="fg"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+    <div class="fg"><label>Message</label><textarea placeholder="Tell us about your project or question..."></textarea></div>
+    <button type="button">Send Message</button>
+  </div>
+</div>
+
+<div class="page-transition" id="pageTransition"></div>
+
+<script>
+  function goBack(e) {
+    if (e) e.preventDefault();
+    const overlay = document.getElementById('pageTransition');
+    overlay.style.pointerEvents = 'all';
+    overlay.classList.add('active');
+    setTimeout(() => window.location.href = 'gallery-website.html', 750);
+    return false;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') goBack();
+  });
+</script>
+</body>
+</html>

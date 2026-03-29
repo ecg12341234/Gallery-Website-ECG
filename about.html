@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — The Gallery</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  .portrait-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .portrait-card { text-align: center; }
+
+  /* Frame */
+  .portrait-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border: 1.5px solid var(--grey-light);
+    background: var(--bg);
+  }
+
+  /* Photo — swap src="your-photo.jpg" to show */
+  .portrait-photo {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  .portrait-photo[src]:not([src=""]) { display: block; }
+
+  /* Placeholder shown when no photo */
+  .portrait-ph {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 0.5rem;
+  }
+  .portrait-frame:has(.portrait-photo[src]:not([src=""])) .portrait-ph {
+    display: none;
+  }
+  .portrait-ph .ph-icon {
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--grey);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--grey);
+    font-size: 1.2rem; line-height: 1;
+  }
+  .portrait-ph .ph-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.45rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--grey);
+  }
+
+  /* Name & role */
+  .portrait-card h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem; font-weight: 700;
+    margin-top: 0.8rem; margin-bottom: 0.15rem;
+    letter-spacing: 0.02em;
+  }
+  .portrait-card p {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.5rem; color: var(--grey-dark);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin: 0; line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .portrait-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body class="is-page">
+
+<div class="dot-overlay"></div>
+<div class="ceiling"></div>
+<div class="floor floor--sm"></div>
+
+<div class="nav-fixed">
+  <a class="nav-logo" href="gallery-website.html" onclick="return goBack(event)">
+    <svg class="nav-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="64" height="64" fill="#0a0a0a"/>
+      <rect x="12" y="16" width="38" height="6" fill="#f8f8f6"/>
+      <rect x="12" y="29" width="24" height="6" fill="#2b4eff"/>
+      <rect x="12" y="42" width="38" height="6" fill="#f8f8f6"/>
+    </svg>
+    ECG Gallery<span>.</span>
+  </a>
+</div>
+
+<a class="pg-back" href="gallery-website.html" onclick="return goBack(event)">
+  <span class="back-arrow"></span>
+  Gallery
+</a>
+
+<div class="pg-content">
+  <span class="pg-tag">01 — About</span>
+  <h2>About Us</h2>
+  <div class="pg-line"></div>
+  <div class="callout">We believe that fresh perspectives can solve real problems — and that the best ideas come from those willing to question everything.</div>
+  <p>The Gallery Consulting Group is a student-led initiative dedicated to providing strategic insight and creative problem-solving to organizations within our school and local community.</p>
+  <p>Founded in 2026, we bring together a diverse team of analytical thinkers, creatives, and leaders who are passionate about making an impact before we even step foot on a college campus.</p>
+  <p>Our approach blends research-driven strategy with the energy and fresh perspective that only students can bring. We don't just consult — we collaborate, challenge assumptions, and deliver work we're proud of.</p>
+
+  <div class="portrait-grid">
+
+    <!-- Member 1 — replace src="" with your photo path, e.g. src="photos/alice.jpg" -->
+    <div class="portrait-card">
+      <div class="portrait-frame">
+        <img class="portrait-photo" src="" alt="Member 1">
+        <div class="portrait-ph">
+          <div class="ph-icon">+</div>
+          <span class="ph-label">Add photo</span>
+        </div>
+      </div>
+      <h4>Your Name</h4>
+      <p>Founder &amp; Lead</p>
+    </div>
+
+    <!-- Member 2 -->
+    <div class="portrait-card">
+      <div class="portrait-frame">
+        <img class="portrait-photo" src="" alt="Member 2">
+        <div class="portrait-ph">
+          <div class="ph-icon">+</div>
+          <span class="ph-label">Add photo</span>
+        </div>
+      </div>
+      <h4>Team Member</h4>
+      <p>Strategy</p>
+    </div>
+
+    <!-- Member 3 -->
+    <div class="portrait-card">
+      <div class="portrait-frame">
+        <img class="portrait-photo" src="" alt="Member 3">
+        <div class="portrait-ph">
+          <div class="ph-icon">+</div>
+          <span class="ph-label">Add photo</span>
+        </div>
+      </div>
+      <h4>Team Member</h4>
+      <p>Research</p>
+    </div>
+
+    <!-- Member 4 -->
+    <div class="portrait-card">
+      <div class="portrait-frame">
+        <img class="portrait-photo" src="" alt="Member 4">
+        <div class="portrait-ph">
+          <div class="ph-icon">+</div>
+          <span class="ph-label">Add photo</span>
+        </div>
+      </div>
+      <h4>Team Member</h4>
+      <p>Design &amp; Media</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="page-transition" id="pageTransition"></div>
+
+<script>
+  function goBack(e) {
+    if (e) e.preventDefault();
+    const overlay = document.getElementById('pageTransition');
+    overlay.style.pointerEvents = 'all';
+    overlay.classList.add('active');
+    setTimeout(() => window.location.href = 'gallery-website.html', 750);
+    return false;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') goBack();
+  });
+</script>
+</body>
+</html>
