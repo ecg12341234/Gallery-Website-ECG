@@ -430,7 +430,7 @@ body.is-page {
   font-family: 'Syne', sans-serif;
   font-weight: 800; font-size: clamp(0.85rem, 1.6vw, 1.2rem);
   text-transform: uppercase; letter-spacing: -0.01em;
-  text-align: center; line-height: 1.1;
+  text-align: right; line-height: 1.1;
   color: rgba(0,0,0,0.1);
 }
 
