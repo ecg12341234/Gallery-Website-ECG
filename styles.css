@@ -424,6 +424,14 @@ body.is-page {
   position: absolute; bottom: 15%; right: 15%;
   width: 40%; height: 1px; background: rgba(0,0,0,0.06);
 }
+.painting--contact .art-contact-text {
+  position: absolute; bottom: 22%; left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.45rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--black);
+  opacity: 0.35; white-space: nowrap;
+}
 
 /* ── Exhibition number ── */
 .p-number {
